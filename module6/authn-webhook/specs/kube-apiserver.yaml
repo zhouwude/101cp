@@ -41,7 +41,7 @@ spec:
         - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt
         - --tls-private-key-file=/etc/kubernetes/pki/apiserver.key
         - --authentication-token-webhook-config-file=/etc/config/webhook-config.json
-      image: registry.aliyuncs.com/google_containers/kube-apiserver:v1.22.2
+      image: registry.aliyuncs.com/google_containers/kube-apiserver:v1.28.0
       imagePullPolicy: IfNotPresent
       livenessProbe:
         failureThreshold: 8
