@@ -29,11 +29,12 @@ func main() {
 			return
 		}
 		log.Print("receving request")
-		// Check User
+		// Check User这个 token 就是github 的 token 设置成~/.kube/config里面 k8s 会把这个token 带过来
 		ts := oauth2.StaticTokenSource(
 			&oauth2.Token{AccessToken: tr.Spec.Token},
 		)
 		tc := oauth2.NewClient(context.Background(), ts)
+		//那这个 token 去 github 验证
 		client := github.NewClient(tc)
 		user, _, err := client.Users.Get(context.Background(), "")
 		if err != nil {
@@ -50,6 +51,7 @@ func main() {
 		}
 		log.Printf("[Success] login as %s", *user.Login)
 		w.WriteHeader(http.StatusOK)
+		// 拿到 USer 的信息 继续去 k8s 验证
 		trs := authentication.TokenReviewStatus{
 			Authenticated: true,
 			User: authentication.UserInfo{
@@ -57,6 +59,7 @@ func main() {
 				UID:      *user.Login,
 			},
 		}
+		//  把信息写进 response
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"apiVersion": "authentication.k8s.io/v1beta1",
 			"kind":       "TokenReview",
