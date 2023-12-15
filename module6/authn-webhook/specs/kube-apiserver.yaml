@@ -99,6 +99,7 @@ spec:
           mountPath: /etc/config
           readOnly: true
   hostNetwork: true
+  priority: 2000001000
   priorityClassName: system-node-critical
   securityContext:
     seccompProfile:
