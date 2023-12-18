@@ -5,7 +5,8 @@ metadata:
   namespace: default
 subjects:
   - kind: User
-    name: mfanjie
+  # webhook github的name
+    name: zhouwude
     apiGroup: rbac.authorization.k8s.io
 #  - kind: ServiceAccount
 #    name: default
