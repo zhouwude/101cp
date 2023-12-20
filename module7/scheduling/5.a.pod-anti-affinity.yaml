@@ -33,4 +33,4 @@ spec:
             topologyKey: kubernetes.io/hostname
       containers:
         - name: with-pod-affinity
-          image: nginx
+          image: nginx:alpine

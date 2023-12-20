@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx
+          image: nginx:alpine
       tolerations:
         - key: "for-special-user"
           operator: "Equal"
