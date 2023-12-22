@@ -18,12 +18,12 @@ spec:
           volumeMounts:
           - mountPath: /cache
             name: cache-volume
+        - image: centos
+          name: centos
         - command:
-        - tail
-        - -f
-        - /dev/null
-        image: centos
-        name: centos
+          - tail
+          - -f
+          - /dev/null
           volumeMounts:
           - mountPath: /cache
             name: cache-volume
