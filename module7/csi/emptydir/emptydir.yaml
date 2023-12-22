@@ -18,7 +18,7 @@ spec:
           volumeMounts:
           - mountPath: /cache
             name: cache-volume
-        - name: nginx_1
+        - name: nginx-1
           image: nginx
           volumeMounts:
           - mountPath: /cache
