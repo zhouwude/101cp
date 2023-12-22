@@ -18,8 +18,12 @@ spec:
           volumeMounts:
           - mountPath: /cache
             name: cache-volume
-        - name: nginx-1
-          image: nginx
+        - command:
+        - tail
+        - -f
+        - /dev/null
+        image: centos
+        name: centos
           volumeMounts:
           - mountPath: /cache
             name: cache-volume
