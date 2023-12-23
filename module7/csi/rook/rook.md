@@ -10,7 +10,7 @@ Create a raw disk from virtualbox console and attach to the vm (must > 5G).
 
 ### Clean env for next demo
 <!-- delete ns rook-ceph 删除 namespace -->
-```sh
+```sh=；
 delete ns rook-ceph
 for i in `kubectl api-resources | grep true | awk '{print \$1}'`; do echo $i;kubectl get $i -n clusternet-skgdp; done
 ```
