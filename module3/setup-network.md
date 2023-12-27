@@ -67,7 +67,7 @@ ip link set A up
 ```sh
 SETIP=172.17.0.10
 SETMASK=16
-GATEWAY=172.17.0.1
+GATEWAY=172.17.0.1  //网关地址
 
 ip link set B netns $pid
 ip netns exec $pid ip link set dev B name eth0
