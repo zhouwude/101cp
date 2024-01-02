@@ -26,19 +26,21 @@ kubectl create -f ingress.yaml
 ```
 
 ### Test the result
-
+<!-- 10.96.129.187 是ingress创建 service -->
 ```sh
-curl -H "Host: cncamp.com" https://10.109.204.181 -v -k
+curl -H "Host: cncamp.com" https://10.96.129.187 -v -k
 ```
 
 ### Understand why ingress is not enough?
-
+<!-- 理解为什么ingress是不够的?  极简的需求可以用  不能真正达到生产需求
+ingress 不支持 header rewrite 也不支持 url rewrite 很难满足生产环境。
+-->
 - tls: cypher, dhkey, TLSVersion
 - header based L7 rule
 - rewriting?
   - header rewriting
   - URI rewriting
-
+<!-- 在nginx ingress中如何支持重写 ingress 不支持  counter lstio-->
 ### How rewrite is supported in nginx ingress
 
 ```

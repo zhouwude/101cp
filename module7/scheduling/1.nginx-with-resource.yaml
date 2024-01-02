@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-deployment-evict
 spec:
   replicas: 1
   selector:
@@ -12,13 +12,14 @@ spec:
       labels:
         app: nginx
     spec:
+      nodeName: node
       containers:
         - name: nginx
           image: nginx
           resources:
             limits:
               memory: 1Gi
-              cpu: 1
+              cpu: 10
             requests:
               memory: 256Mi
-              cpu: 100m
+              cpu: 5
