@@ -1,12 +1,13 @@
-## nodefs
+## nodefs 系统分区 工作目录和容器日志
 
 ### containerd & docker
 
 `/var/lib/kubelet/pods/ecbbaf5e-c7f1-4f00-8627-454f03cfbb4d`
 
-## imagefs
-
-### containerd
+## imagefs 容器运行时分区 也就是容器运行时的目录 overlayFS作为容器存储系统的驱动 
+<!-- 两层结构 容器可写层和镜像层 -->
+<!-- 不同的容器运行时目录的区别 -->
+### containerd 
 
 `/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs`
 

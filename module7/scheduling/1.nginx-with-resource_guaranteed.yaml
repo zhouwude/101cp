@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-guaranreed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      nodeName: node
+      containers:
+        - name: nginx
+          image: nginx
+          resources:
+            limits:
+              memory: 520Mi
+              cpu: 500m
+            requests:
+              memory: 520Mi
+              cpu: 500m
