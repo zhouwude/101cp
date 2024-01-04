@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-deployment-extend-resource
 spec:
   replicas: 1
   selector:
@@ -17,6 +17,6 @@ spec:
           image: nginx
           resources:
             limits:
-              cncamp.com/reclaimed-cpu: 3
+              cncamp.com/reclaimed-cpu: 2
             requests:
-              cncamp.com/reclaimed-cpu: 3
+              cncamp.com/reclaimed-cpu: 2
