@@ -18,4 +18,4 @@ spec:
           stdin: true
           tty: true
       hostNetwork: true
-      nodeName: cadmin
+      nodeName: node
