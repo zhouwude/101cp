@@ -5,7 +5,7 @@ rm -rf /var/lib/rook
 ```
 
 ### Add a new raw device
-
+<!-- 在virtualbox控制台创建裸盘并挂载虚拟机(必须> 5G)。 -->
 Create a raw disk from virtualbox console and attach to the vm (must > 5G).
 
 ### Clean env for next demo

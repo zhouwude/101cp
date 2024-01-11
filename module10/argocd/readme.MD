@@ -14,8 +14,9 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 - user: `admin`
 - password:
   ```sh
-  k get secret -n argocd argocd-initial-admin-secret -oyaml
+  k get secret -n argocd argocd-initial-admin-secret -oyaml | base64 -d
   ```
+    <!-- k get secret -n argocd argocd-initial-admin-secret -oyaml | base64 -d -->
 
 ### Manage repositories->connect repo using https
 

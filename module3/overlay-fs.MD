@@ -14,7 +14,7 @@ $ echo "from upper" > upper/in_both.txt
 ### Check it
 
 ```log
-root@k8s-master:~/testlab# tree .
+root@k8s-master:~/overlayfs# tree .
 .
 ├── lower
 │   ├── in_both.txt
@@ -45,9 +45,9 @@ $ cat merged/in_upper.txt
 ```
 
 ```shell
-$ df -h | grep testlab
+$ df -h | grep overlayfs
 
-overlay                             29G  9.7G   18G  36% /root/testlab/merged
+overlay                             29G  9.7G   18G  36% /root/overlayfs/merged
 ```
 
 ### Delete merged file
