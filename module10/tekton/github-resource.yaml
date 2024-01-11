@@ -20,7 +20,7 @@ metadata:
   name: github-secrets
 type: Opaque
 data:
-  token: changeme # in base64 encoded form
+  token: Z2hwX1U1ZzJOU1ZneFdCUGpEaldmbTc2ODh4RXI5clBjejNhWXN4Rwo= # in base64 encoded form
 ---
 apiVersion: v1
 kind: Secret
@@ -32,7 +32,7 @@ stringData:
     {
       "auths": {
         "https://index.docker.io/v1/": {
-          "auth": "changeme"
+          "auth": "emhvdXd1ZGU6QG1iMTMxNGxvdmU="
         }
       }
     }
