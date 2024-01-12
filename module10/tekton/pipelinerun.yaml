@@ -1,0 +1,17 @@
+kind: PipelineRun
+apiVersion: tekton.dev/v1beta1
+metadata:
+  name: run-basic-pipeline-from-git
+spec:
+  pipelineRef:
+    resolver: git
+    params:
+    - name: url
+      value: ${REPO_URL}
+    - name: revision
+      value: add-a-simple-pipeline
+    - name: pathInRepo
+      value: pipeline.yaml
+  params:
+  - name: username
+    value: liza
