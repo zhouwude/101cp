@@ -39,9 +39,48 @@ spec:
   resources:
     inputs:
     - name: repo
-      resourceRef:
-        name: cncamp-golang
+      resourceSpec:
+       type: git
+       params:
+        - name: url
+          value: https://github.com/cncamp/golang.git
+        - name: revision
+          value: master
+       secrets:
+        - fieldName: authToken
+          secretName: github-secrets
+          secretKey: token
   workspaces:
   - name: dockerconfig
     secret:
       secretName: docker-auth
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-secrets
+type: Opaque
+data:
+  token: Z2hwX1U1ZzJOU1ZneFdCUGpEaldmbTc2ODh4RXI5clBjejNhWXN4Rwo= # in base64 encoded form
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: docker-auth
+type: Opaque
+stringData: 
+  config.json: |-
+    {
+      "auths": {
+        "https://index.docker.io/v1/": {
+          "auth": "emhvdXd1ZGU6QG1iMTMxNGxvdmU="
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cncamp-sa
+secrets:
+- name: docker-auth
