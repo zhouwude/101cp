@@ -26,10 +26,5 @@ spec:
   - name: dockerconfig
     description: Includes a docker `config.json`
     optional: true
-<<<<<<< HEAD
     mountPath: /kaniko/.docker
 
-
-=======
-    mountPath: /kaniko/.docker
->>>>>>> 7837e881a8d8edadece87dc048a9d1c6087ccdbe
