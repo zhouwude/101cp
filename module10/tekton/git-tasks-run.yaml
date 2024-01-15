@@ -4,8 +4,7 @@ metadata:
   name: github-build
   generateName: zhouwude-
 spec:
-  serviceAccountName: cncamp-sa
-  resolver: cluster
+  serviceAccountName: default
   taskRef:
     name: github-build
   resources:
@@ -26,33 +25,33 @@ spec:
   - name: dockerconfig
     secret:
       secretName: docker-auth #存储认证文件的 secret
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: github-secrets
-type: Opaque
-data:
-  token: Z2hwX1U1ZzJOU1ZneFdCUGpEaldmbTc2ODh4RXI5clBjejNhWXN4Rwo= # in base64 encoded form
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: docker-auth
-type: Opaque
-stringData:
-  config.json: |-
-    {
-      "auths": {
-        "https://index.docker.io/v1/": {
-          "auth": "emhvdXd1ZGU6QG1iMTMxNGxvdmU="
-        }
-      }
-    }
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: cncamp-sa
-secrets:
-- name: docker-auth
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: github-secrets
+# type: Opaque
+# data:
+#   token: Z2hwX1U1ZzJOU1ZneFdCUGpEaldmbTc2ODh4RXI5clBjejNhWXN4Rwo= # in base64 encoded form
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: docker-auth
+# type: Opaque
+# stringData:
+#   config.json: |-
+#     {
+#       "auths": {
+#         "https://index.docker.io/v1/": {
+#           "auth": "emhvdXd1ZGU6QG1iMTMxNGxvdmU="
+#         }
+#       }
+#     }
+# ---
+# apiVersion: v1
+# kind: ServiceAccount
+# metadata:
+#   name: cncamp-sa
+# secrets:
+# - name: docker-auth
