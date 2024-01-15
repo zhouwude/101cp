@@ -1,0 +1,58 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: github-build
+  generateName: zhouwude-
+spec:
+  # serviceAccountName: cncamp-sa
+  resolver: cluster
+  taskRef:
+    name: github-build
+  resources:
+    inputs:
+    - name: repo
+      resourceSpec:
+       type: git
+       params:
+        - name: url
+          value: https://github.com/zhouwude/golang.git
+        - name: revision
+          value: main
+       secrets:
+        - fieldName: authToken
+          secretName: github-secrets
+          secretKey: token
+  workspaces: #指定要用于 声明的 Workspaces 的物理卷。Task 把 docker的auth 文件 mount 到容器内部
+  - name: dockerconfig
+    secret:
+      secretName: docker-auth #存储认证文件的 secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-secrets
+type: Opaque
+data:
+  token: Z2hwX1U1ZzJOU1ZneFdCUGpEaldmbTc2ODh4RXI5clBjejNhWXN4Rwo= # in base64 encoded form
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: docker-auth
+type: Opaque
+stringData:
+  config.json: |-
+    {
+      "auths": {
+        "https://index.docker.io/v1/": {
+          "auth": "emhvdXd1ZGU6QG1iMTMxNGxvdmU="
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cncamp-sa
+secrets:
+- name: docker-auth
