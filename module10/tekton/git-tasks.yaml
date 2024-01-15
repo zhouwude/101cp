@@ -10,10 +10,10 @@ spec:
   - name: DOCKERFILE
     description: Path to the Dockerfile to build.
     default: ./httpserver/Dockerfile
-  resources:
-    inputs:
-    - name: repo
-      type: git
+  # resources:
+  #   inputs:
+  #   - name: repo
+  #     type: git
   steps:
   - name: github-build
     image: cncamp/executor
