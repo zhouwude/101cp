@@ -3,32 +3,27 @@ kind: Task
 metadata:
   name: github-build
 spec:
-  params: #指定 的执行参数。Task
-    - name: IMAGE
-      description: Name (reference) of the image to build.
-      default: zhouwude/httpserver:v2.0.0
-    - name: DOCKERFILE
-      description: Path to the Dockerfile to build.
-      default: ./httpserver/Dockerfile
-  # resources:
-  #   inputs:
-  #     - name: repo
-  #       type: git  
+  params:
+  - name: IMAGE
+    description: Name (reference) of the image to build.
+    default: cncamp/httpserver:v1.0
+  - name: DOCKERFILE
+    description: Path to the Dockerfile to build.
+    default: ./httpserver/Dockerfile
   resources:
     inputs:
     - name: repo
       type: git
-  steps: #指定要在 中运行的一个或多个容器映像。Task
-    - name: github-build
-      image: zhouwude/kaniko-executor
-      workingDir: /workspace/repo
-      args:
-        - "--dockerfile=./httpserver/Dockerfile"
-        - "--context=./httpserver"
-        - "--destination=cncamp/httpserver:v1.0"
-  workspaces: #工作区允许您指定 执行期间所需的一个或多个卷。建议最多使用一个可写文件。例如：TaskTasksWorkspace
+  steps:
+  - name: github-build
+    image: cncamp/executor
+    workingDir: /workspace/repo
+    args:
+    - "--dockerfile=./httpserver/Dockerfile"
+    - "--context=./httpserver"
+    - "--destination=cncamp/httpserver:v1.0"
+  workspaces:
   - name: dockerconfig
     description: Includes a docker `config.json`
     optional: true
     mountPath: /kaniko/.docker
-
