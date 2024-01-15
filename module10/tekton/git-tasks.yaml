@@ -10,13 +10,14 @@ spec:
     - name: DOCKERFILE
       description: Path to the Dockerfile to build.
       default: ./httpserver/Dockerfile
+  # resources:
+  #   inputs:
+  #     - name: repo
+  #       type: git  
   resources:
     inputs:
-      - name: repo
-        type: git
-    outputs:
-      - name: build-image
-        type: image
+    - name: repo
+      type: git
   steps: #指定要在 中运行的一个或多个容器映像。Task
     - name: github-build
       image: zhouwude/kaniko-executor
