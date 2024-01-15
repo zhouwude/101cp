@@ -1,0 +1,40 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata: 
+  name: build-and-push-image
+spec:
+ params:
+ - name: pathToDockerfile
+   type: string
+   default: /workspace/repo/Dockerfile
+   description: define Dockerfile path
+ - name: pathToContext
+   type: string
+   default: /workspace/repo
+   description: Docker deamon build context
+ - name: imageRepo
+   type: string
+   default: registry.cn-hangzhou.aliyuncs.com
+   description: docker image repo
+ resources:
+  inputs:
+  - name: repo
+    type: git
+  outputs:
+  - name: builtImage
+    type: image
+ steps:
+ - name: build-image
+   image: docker:stable
+   script: |
+    #!/usr/bin/env sh
+    docker login $(params.imageRepo)
+    docker build -t $(resources.outputs.builtImage.url) -f $(params.pathToDockerfile) $(params.pathToContext)
+    docker push $(resources.outputs.builtImage.url)
+   volumeMounts:
+   - name: dockersock
+     mountPath: /var/run/docker.sock
+ volumes:
+ - name: dockersock
+   hostPath:
+    path: /var/run/docker.sock
