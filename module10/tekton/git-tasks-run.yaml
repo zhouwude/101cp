@@ -4,7 +4,7 @@ metadata:
   name: github-build
   generateName: zhouwude-
 spec:
-  # serviceAccountName: cncamp-sa
+  serviceAccountName: cncamp-sa
   resolver: cluster
   taskRef:
     name: github-build
