@@ -3,10 +3,10 @@ kind: Task
 metadata:
   name: github-build
 spec:
-  params:
+  params: #指定 的执行参数。Task
   - name: IMAGE
     description: Name (reference) of the image to build.
-    default: cncamp/httpserver:v1.0
+    default: zhouwude/httpserver:v2.0.0
   - name: DOCKERFILE
     description: Path to the Dockerfile to build.
     default: ./httpserver/Dockerfile
@@ -14,73 +14,17 @@ spec:
     inputs:
     - name: repo
       type: git
-  steps:
+  steps: #指定要在 中运行的一个或多个容器映像。Task
   - name: github-build
-    image: cncamp/executor
+    image: zhouwude/kaniko-executor
     workingDir: /workspace/repo
     args:
     - "--dockerfile=./httpserver/Dockerfile"
     - "--context=./httpserver"
     - "--destination=cncamp/httpserver:v1.0"
-  workspaces:
+  workspaces: #工作区允许您指定 执行期间所需的一个或多个卷。建议最多使用一个可写文件。例如：TaskTasksWorkspace
   - name: dockerconfig
     description: Includes a docker `config.json`
     optional: true
     mountPath: /kaniko/.docker
----
-apiVersion: tekton.dev/v1beta1
-kind: TaskRun
-metadata:
-  name: github-build
-spec:
-  serviceAccountName: cncamp-sa
-  taskRef:
-    name: github-build
-  resources:
-    inputs:
-    - name: repo
-      resourceSpec:
-       type: git
-       params:
-        - name: url
-          value: https://github.com/cncamp/golang.git
-        - name: revision
-          value: master
-       secrets:
-        - fieldName: authToken
-          secretName: github-secrets
-          secretKey: token
-  workspaces:
-  - name: dockerconfig
-    secret:
-      secretName: docker-auth
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: github-secrets
-type: Opaque
-data:
-  token: Z2hwX1U1ZzJOU1ZneFdCUGpEaldmbTc2ODh4RXI5clBjejNhWXN4Rwo= # in base64 encoded form
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: docker-auth
-type: Opaque
-stringData: 
-  config.json: |-
-    {
-      "auths": {
-        "https://index.docker.io/v1/": {
-          "auth": "emhvdXd1ZGU6QG1iMTMxNGxvdmU="
-        }
-      }
-    }
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: cncamp-sa
-secrets:
-- name: docker-auth
+
