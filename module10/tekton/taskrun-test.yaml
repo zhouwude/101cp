@@ -3,12 +3,21 @@ kind: TaskRun
 metadata:
   generateName: object-param-result-
 spec:
+  serviceAccountName: default
   params:
   - name: gitrepo
     value:
       commit: sha123
       url: xyz.com
   taskSpec:
+    params:
+      - name: gitrepo
+        type: object
+        properties:
+          url:
+            type: string
+          commit:
+            type: string
     steps:
     - name: echo-object-params
       image: bash
