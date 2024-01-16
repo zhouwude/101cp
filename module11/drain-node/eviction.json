@@ -2,7 +2,7 @@
   "apiVersion": "policy/v1",
   "kind": "Eviction",
   "metadata": {
-    "name": "nginx-deployment-9b44bf4b5-x4xc4",
+    "name": "nginx-deployment-drain-7854ff8877-778mb",
     "namespace": "default"
   }
-}
+{
