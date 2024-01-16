@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: website-build-
+spec:
+  serviceAccountName: default
+  resources:
+    inputs:
+    - name: code
+      resourceSpec:
+        type: git
+        params:
+          - name: url
+            value: https://github.com/soulchildwm/tekton-demo.git
+          - name: revision
+            value: python-website
+    outputs:
+    - name: builtImage
+      resourceSpec:
+        type: image
+        params:
+          - name: url
+            value: registry.cn-shanghai.aliyuncs.com/soulchild/zero
+  params:
+  - name: dockerfileName
+    value: ./Dockerfile
+  taskRef:
+    name: docker-build-push

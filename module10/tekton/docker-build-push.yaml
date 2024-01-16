@@ -1,0 +1,49 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: docker-build-push
+spec:
+  params:
+    - name: dockerfileName
+      type: string
+      description: dockerfile文件名,作为docker build -f的参数
+      default: Dockerfile
+  # 指定需要一个git输入资源、一个image输出资源,在这个task运行时必要要提供
+  resources:
+    inputs:
+      - name: code
+        type: git
+    outputs:
+      - name: builtImage
+        type: image
+  steps:
+    - name: docker-build
+      image: docker:stable
+      workingDir: "/workspace/$(resources.inputs.code.name)"
+      args:
+        [
+          "build",
+          "--no-cache",
+          "--tag",
+          "$(resources.outputs.builtImage.url)",
+          "--file",
+          "$(params.dockerfileName)",
+          ".",
+        ]
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+
+    - name: docker-push
+      image: docker:stable
+      args: ["push", "$(resources.outputs.builtImage.url)"]
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+
+  # 定义一个卷，用于挂载主机的docker socket文件
+  volumes:
+    - name: docker-socket
+      hostPath:
+        path: /var/run/docker.sock
+        type: Socket
