@@ -1,5 +1,8 @@
 ### Create a kubebuilder project, which requires an empty folder
 
+```
+go mod init github.com/cncamp/demo-operator
+```
 ```sh
 kubebuilder init --domain cncamp.io
 ```
