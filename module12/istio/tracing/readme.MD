@@ -3,7 +3,7 @@
 ```sh
 kubectl apply -f jaeger.yaml
 kubectl edit configmap istio -n istio-system
-set tracing.sampling=100
+set tracing.sampling=100 //采样率
 ```
 
 ### Deploy tracing

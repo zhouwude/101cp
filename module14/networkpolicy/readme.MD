@@ -42,3 +42,4 @@ kubectl create -f access-calico-demo.yaml
 curl <calico-pod-ip>
 ping <calico-pod-ip>
 ```
+<!-- 定义基于集群的策略和 ns 的策略 这些是同事时生效的只有规则重合优先使用 基于ns的策略，其他的啥都是并集的规则 -->

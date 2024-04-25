@@ -16,6 +16,7 @@ spec:
             port:
               number: 80
 ---
+# 提供负载均衡
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
@@ -32,4 +33,4 @@ spec:
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: cncamp-credential
+        credentialName: cncamp-credential # secret 的名字

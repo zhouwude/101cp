@@ -11,11 +11,11 @@ spec:
   - match:
     - uri:
         exact: "/simple/hello"
-    rewrite:
-      uri: "/hello"
+    rewrite: 
+      uri: "/hello" # 转到内部的名称
     route:
       - destination:
-          host: simple.simple.svc.cluster.local
+          host: simple.simple.svc.cluster.local #fqdn完全限定域名
           port:
             number: 80
   - match:
@@ -25,7 +25,7 @@ spec:
       uri: "/"
     route:
       - destination:
-          host: nginx.simple.svc.cluster.local
+          host: nginx.simple.svc.cluster.local #fqdn
           port:
             number: 80
 ---
@@ -35,7 +35,7 @@ metadata:
   name: simple
 spec:
   selector:
-    istio: ingressgateway
+    istio: ingressgateway #通过 label 选择找到 istio-proxy 这里是 ingress-gateway
   servers:
     - hosts:
         - simple.cncamp.io

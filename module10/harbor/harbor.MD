@@ -52,7 +52,7 @@ systemctl restart docker
 ```
 
 ### Edit /etc/hosts to map core.harbor.domain to harbor svc clusterip
-
+<!-- 草 这里是harbor 这个svc 的 clusterip 不是harbor core -->
 ```sh
 10.104.231.99 core.harbor.domain
 ```

@@ -2,7 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-http
-  namespace: calico-demo
+  # 该策略只用于calico-demo这个 ns  podSelector: {}也是针对这个ns
+  namespace: calico-demo 
 spec:
   podSelector: {}
   ingress:

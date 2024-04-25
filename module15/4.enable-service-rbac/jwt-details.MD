@@ -28,6 +28,7 @@ cat productpage-v2/productpage.py
 ### build docker images for productpage v2 with jwt token
 ### create product page v2
 ```
+<!-- V2里面直接把jwt 带进去了 所以这里不许要手动设置 header -->
 kubectl apply -f productpage-v2/productpage.yaml
 ```
 ### access productpage and you will see error in 50% percents

@@ -21,16 +21,19 @@ kubectl get svc -n istio-system
 ```
 ### access productpage
 ```
-curl http://192.168.34.2:31783/productpage
+<!-- 换成自己的nodeid 和 nodeport -->
+curl http://172.16.0.3:31783/productpage
 ```
 
 ### secure the gateway by https protocol
 ```
-openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=cncamp Inc./CN=192.168.34.2' -keyout bookinfo.key -out bookinfo.crt
+<!-- /O=cncamp Inc./CN=172.16.0.3 o是 organazation 相当于用户组 common name 相当于用户 -->
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=cncamp Inc./CN=172.16.0.3' -keyout bookinfo.key -out bookinfo.crt
 kubectl create -n istio-system secret tls bookinfo-credential --key=bookinfo.key --cert=bookinfo.crt
 kubectl apply -f https-gateway.yaml
 ```
 ### access product page via safari(chrome blocks self sign certs)
 ```
-https://192.168.34.2:31106/productpage
+https://172.16.0.3:31106/productpage
+  curl https://172.16.0.3:31106/productpage -k (-k 模拟 https)
 ```

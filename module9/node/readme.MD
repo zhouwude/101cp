@@ -5,7 +5,7 @@
 `/var/lib/kubelet/pods/ecbbaf5e-c7f1-4f00-8627-454f03cfbb4d`
 
 ## imagefs 容器运行时分区 也就是容器运行时的目录 overlayFS作为容器存储系统的驱动 
-<!-- 两层结构 容器可写层和镜像层 -->
+<!-- 两层结构 容器可写层和镜像层 镜像层 是 readonly 的-->
 <!-- 不同的容器运行时目录的区别 -->
 ### containerd 
 

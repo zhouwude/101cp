@@ -8,8 +8,10 @@ spec:
   http:
     - match:
         - port: 80
-      route:
+      route: #路由规则的名称 会被 istiod 解析 生成envoy 的规则 listener route cluster endpoint 
         - destination:
             host: nginx
             port:
               number: 80
+
+              # XDS extended discover service

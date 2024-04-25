@@ -11,6 +11,7 @@ simple        ClusterIP   10.97.215.11     <none>        80/TCP     7d4h
 ```
 ### access product page directly
 ```
+没有任何限制 哪里都可以访问
 curl 10.111.120.47:9080
 ```
 ### enable mtls globally
@@ -23,5 +24,5 @@ curl 10.111.120.47:9080
 ```
 ### access the gateway page via istio ingress gateway and it is still working
 ```
-https://192.168.34.2:31106/productpage
+https://k8snode:31106/productpage
 ```

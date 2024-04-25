@@ -10,6 +10,8 @@ kubectl apply -f toolbox.yaml -n canary
 ### Access canary in toolbox
 
 ```sh
+#canary  fqdn  canary.canary.svc.cluster.local  
+#cat /etc/resolv.conf 
 curl canary/hello
 ```
 

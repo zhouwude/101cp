@@ -17,6 +17,7 @@ spec:
         image: cncamp/hpa-example
         ports:
         - containerPort: 80
+        # resource 必须设置 要不然average utilization 无法计算
         resources:
           limits:
             cpu: 500m

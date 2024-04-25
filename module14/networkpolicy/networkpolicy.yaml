@@ -4,4 +4,4 @@ metadata:
   name: default-deny
   namespace: calico-demo
 spec:
-  podSelector: {}
+  podSelector: {} #所有的 pod 选中都是 默认是ingress 

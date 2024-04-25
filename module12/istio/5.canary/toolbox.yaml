@@ -13,10 +13,11 @@ spec:
         app: toolbox
         access: "true"
     spec:
+    # 相当于一个client 的 instance
       containers:
         - name: toolbox
           image: centos
-          command:
+          command: #防止退出
             - tail
             - -f
             - /dev/null

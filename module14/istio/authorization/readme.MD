@@ -1,5 +1,6 @@
 ### define allow nothing rule in foo
 ```
+<!-- 不接受任何请求 也不能访问别人-->
 kubectl apply -f - <<EOF
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
@@ -35,6 +36,7 @@ spec:
         methods: ["GET"]
 EOF
 ```
+
 ### access from bar.sleep to foo.httpbin
 ### access from foo.sleep to foo.httpbin
 ```
@@ -45,7 +47,7 @@ kubectl exec "$(kubectl get pod -l app=sleep -n foo -o jsonpath={.items..metadat
 ### allow accessing from bar.sleep to foo.httpbin
 ```
 kubectl apply -f - <<EOF
-apiVersion: security.istio.io/v1beta1
+apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
   name: "httpbin-viewer"
@@ -58,10 +60,35 @@ spec:
   rules:
   - from:
     - source:
-        principals: ["cluster.local/ns/bar/sa/sleep"]
+        namespaces: ["bar"]
     to:
     - operation:
         methods: ["GET"]
+        paths: ["/info*"]
+EOF
+```
+```
+kubectl apply -f - <<EOF
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: "httpbin-viewer"
+  namespace: foo
+spec:
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/bar/sa/sleep"]
+    - source:
+        namespaces: ["bar"]
+    to:
+    - operation:
+        methods: ["GET"]
+        paths: ["/info*"]
+    - operation:
+        methods: ["POST"]
+        paths: ["/data"]
 EOF
 ```
 ### access from bar.sleep to foo.httpbin

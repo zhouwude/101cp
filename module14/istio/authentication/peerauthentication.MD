@@ -1,6 +1,7 @@
 ### setup
 ```
 kubectl create ns foo
+<!-- samples/httpbin/httpbin.yaml 在istio 里面特么的 -->
 kubectl apply -f <(istioctl kube-inject -f samples/httpbin/httpbin.yaml) -n foo
 kubectl apply -f <(istioctl kube-inject -f samples/sleep/sleep.yaml) -n foo
 kubectl create ns bar
@@ -52,6 +53,7 @@ curl 192.168.166.178/headers
 ```
 ### Globally enabling Istio mutual TLS in STRICT mode
 ```
+ 部署在了 istio-system 这个基于服务端的认证策略针对集群全局生效 前提是应用被 istio管控也即是注入了 sidecar
 kubectl apply -f - <<EOF
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication

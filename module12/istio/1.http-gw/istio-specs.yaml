@@ -12,10 +12,11 @@ spec:
         - port: 80
       route:
         - destination:
-            host: simple.simple.svc.cluster.local
+            host: simple.simple.svc.cluster.local #cluster cds 完全限定域名 fqdn
             port:
               number: 80
 ---
+# ingress-gateway 入站流量的 istio-proxy 非网格内部。
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
@@ -24,6 +25,7 @@ spec:
   selector:
     istio: ingressgateway
   servers:
+  # listener
     - hosts:
         - simple.cncamp.io
       port:

@@ -23,6 +23,10 @@ version: "3"
 ### Create API, create resource[Y], create controller[Y]
 
 ```sh
+# 创建新的 api 相当于一个新的 k get apiservice  GKV 三要素 apigroup apiversion kind 
+# --kind 创建的 crd 的类型 controller gen /bin 目录下 控制器生成工具
+#api 目录下面 有api 文件
+# internal/controller 下面有 controller 代码
 kubebuilder create api --group apps --version v1beta1 --kind MyDaemonset
 ```
 
@@ -47,6 +51,13 @@ type MyDaemonsetStatus struct {
 ```
 
 ### Check Makefile
+<!-- make manifests生成对应的 Generate WebhookConfiguration, ClusterRole and CustomResourceDefinition objects-->
+<!-- make install  在~/.kube/config中指定的K8s集群中安装crd。
+make build -> make all 整个流程走一遍
+make docker-build 构建镜像
+make  docker-push 推送镜像
+make deploy  将控制器部署到~/.kube/config中指定的K8s集群。
+-->
 
 ```makefile
 Build targets:
@@ -82,9 +93,13 @@ make manifests
 
 ```sh
 make build
-make docker-build
-make docker-push
-make deploy
+# 生成映像并将其推送到以下位置
+make docker-build 
+# 将控制器部署到具有以下项指定的映像的集群
+make docker-push 
+# 这里注意必须把 controller 的镜像 push之后才能 deploy controller
+# controller 部署在一个单独的 namespace 里面。
+make deploy #将 crd 和 controller 都不知道集群当中去
 ```
 
 ## Enable webhooks
@@ -104,5 +119,5 @@ kubebuilder create webhook --group apps --version v1beta1 --kind MyDaemonset --d
 ### Change code
 
 ### Enable webhook in `config/default/kustomization.yaml`
-
+### make install 需要安装一些 webhook 的CRD
 ### Redeploy

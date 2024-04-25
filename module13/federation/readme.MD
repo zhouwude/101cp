@@ -3,7 +3,7 @@
 ```
 git clone https://github.com/kubernetes-sigs/kubefed.git
 ```
-### 选择HostCluster，确认kubeconfig符合federatio命名规范，用vi编辑kubeconfig，确保context属性没用@字符
+### 选择HostCluster，确认kubeconfig符合federation命名规范，用vi编辑kubeconfig，确保context属性没用@字符
 ```
 vi ~/.kube/config 
 ```

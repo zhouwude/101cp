@@ -23,5 +23,6 @@ istio-ingressgateway   LoadBalancer   $INGRESS_IP
 ### Access the httpserver via ingress
 
 ```sh
-curl --resolve httpsserver.cncamp.io:443:$INGRESS_IP https://httpsserver.cncamp.io/healthz -v -k
+healthz 是 httpservice 定义的路径规则
+curl --resolve httpsserver.cncamp.io:443:10.107.158.77 https://httpsserver.cncamp.io/healthz -v -k
 ```

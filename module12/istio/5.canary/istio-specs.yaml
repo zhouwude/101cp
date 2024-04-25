@@ -4,7 +4,8 @@ metadata:
   name: canary
 spec:
   hosts:
-    - canary
+  #这里没配置 gateway 使用coredns/kube-dns配置的域名  canary的 service （canary.canary.svc.cluster.local fqdn）
+    - canary 
   http:
     - match:
         - headers:
@@ -19,22 +20,23 @@ spec:
           host: canary
           subset: v1
 ---
+# select 都可以命中多个 backendpod 所以需要lB
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: canary
 spec:
   host: canary
-  trafficPolicy:
+  trafficPolicy: #流量控制策略
     loadBalancer:
       simple: RANDOM
-  subsets:
+  subsets: #定义版本 子集合
     - name: v1
-      labels:
+      labels: #通过 selecter 找到后端的 pod
         version: v1
-    - name: v2
+    - name: v2 #V2使用轮询LB算法
       labels:
         version: v2
-      trafficPolicy:
+      trafficPolicy: 
         loadBalancer:
-          simple: ROUND_ROBIN
+          simple: ROUND_ROBIN 

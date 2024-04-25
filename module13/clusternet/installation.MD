@@ -33,12 +33,12 @@ kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/ma
 ### child cluster, registrationToken is installed in kube-system
 ```
 helm install clusternet-agent -n clusternet-system --create-namespace \
---set parentURL=https://192.168.34.2:6443 \
+--set parentURL=https://172.16.0.3:6443 \
 --set registrationToken=07401b.f395accd246ae52d \
 clusternet/clusternet-agent
 ```
 ### check managed clusters
 ```
-kubectl get managedcluster -A
+kubectl get managedcluster -A 这里的-A 是获取所有的 namespaces 的
 ```
 

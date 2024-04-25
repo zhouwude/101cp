@@ -17,7 +17,7 @@ spec:
           imagePullPolicy: Always
           image: cncamp/service0:v1.0
           ports:
-            - containerPort: 80
+            - containerPort: 80 #pod 的80端口 localhost：80
 ---
 apiVersion: v1
 kind: Service

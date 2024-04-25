@@ -5,9 +5,9 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: details
+      app: details   
   action: ALLOW
   rules:
     - from:
         - source:
-            requestPrincipals: ["testing@secure.istio.io/testing@secure.istio.io"]
+            requestPrincipals: ["testing@secure.istio.io/testing@secure.istio.io"] #签发实体

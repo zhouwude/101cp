@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: canary
+  name: canary-latancy
 spec:
   hosts:
     - canary
@@ -14,17 +14,13 @@ spec:
         - destination:
             host: canary
             subset: v2
-      ### retry if upstream server send 5xx 
-      retries:
-        attempts: 3
-        perTryTimeout: 2s
     - route:
       - destination:
           host: canary
           subset: v1
       ### send 500 to client in 80%
       fault:
-        abort:
-          httpStatus: 500
+        delay:
+          fixedDelay: 5s
           percentage:
             value: 80

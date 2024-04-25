@@ -11,14 +11,14 @@ spec:
   - match:
       - uri:
           exact: /service0
-    route:
+    route: #转到 service0 的 80端口 这里 service 对应 envoy 的 cluster
       - destination:
-          host: service0
+          host: service0 #service0.tracing.svc.cluster.local fqdn
           port:
             number: 80
 ---
 apiVersion: networking.istio.io/v1beta1
-kind: Gateway
+kind: Gateway #负载均衡
 metadata:
   name: service0
 spec:

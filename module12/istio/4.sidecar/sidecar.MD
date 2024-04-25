@@ -2,6 +2,7 @@
 
 ```sh
 kubectl create ns sidecar
+# 给命名空间添加标签，指示 Istio 在部署应用的时候，自动注入 Envoy 边车代理：
 kubectl label ns sidecar istio-injection=enabled
 kubectl apply -f nginx.yaml -n sidecar
 kubectl apply -f toolbox.yaml -n sidecar

@@ -29,6 +29,7 @@ kubectl create -f ingress.yaml
 <!-- 10.96.129.187 是ingress创建 service -->
 ```sh
 curl -H "Host: cncamp.com" https://10.96.129.187 -v -k
+curl -H "Host: argocd.myapp.com" http://10.96.129.187 -v
 ```
 
 ### Understand why ingress is not enough?
@@ -44,6 +45,7 @@ ingress 不支持 header rewrite 也不支持 url rewrite 很难满足生产环�
 ### How rewrite is supported in nginx ingress
 
 ```
+这都是社区提供的 provider 通过添加 annotation 来解决 ingress 的不足，但由于分散不能同意
 Name	Description	Values
 nginx.ingress.kubernetes.io/rewrite-target	Target URI where the traffic must be redirected	string
 nginx.ingress.kubernetes.io/ssl-redirect	Indicates if the location section is accessible SSL only (defaults to True when Ingress contains a Certificate)	bool
